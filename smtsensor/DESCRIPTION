@@ -1,0 +1,20 @@
+Package: smtsensor
+Title: Soil moisture and temperature sensor functions
+Version: 0.0.0.9000
+Authors@R: person("Marie", "English", email = "menglis5@vols.utk.edu", role = c("aut", "cre"))
+Description: Produces summary stats and plots for soil moisture and temperature sensor data
+Depends: R (>= 3.3.2)
+License: CCO
+Encoding: UTF-8
+LazyData: true
+Imports: tidyverse,
+    readr,
+    ggplot2,
+    lubridate,
+    dplyr,
+    utils,
+    tidyr
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1.9000

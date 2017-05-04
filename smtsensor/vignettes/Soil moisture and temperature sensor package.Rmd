@@ -1,0 +1,79 @@
+---
+title: "Soil moisture and temperature sensor package"
+author: "Marie English"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Soil moisture and temperature sensor package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Soil Moisture and Temperature Sensors 
+
+Field sensors collect thousands of data points a year. This package serves to help process 
+the data collected into useful summary statistics. This package is made specifically 
+for soil moisture and temperature sensors that take hourly measurements. 
+
+### Background 
+
+This package summarizes soil moisture and temperature data in three different ways. WHAT WAYS. The inspiration for this package is an interdisciplinary project on the performance and adoption of biodegradable plastic mulches. In the production of many specialty crops, plastic mulch films are employed to provide benefits such as moisture retention, soil temperature optimization, and weed control. As part of this project, soil moisture and temperature data are collected by soil moisture and temperature sensors year-round. There are 16 sensors in two different locations and with hourly collection this leads to a large amount of data. This soil physical data needs to be processed before it can be disseminated to different stakeholders in the project. This package utilizes the moisture and temperature data collected as part of this project and starts to turn it into reportable results. Because these sensors are commercially available, the package would be useful for those who use the same instrumentation and software. 
+
+Running summary statistics and plotting data for each sensor separately is redundant and time consuming. Therefore, this package includes functions to tidy the data into a usable dataframe, to group the data, to summarize it, and to produce graphs for data visulaization. 
+
+## How the functions work
+
+Each field sensor measures soil moisture and temperature at the same time. These numbers are reported side by side in a spreadsheet. Each sensor box contains up to 4 sensors which leads to 8 columns of data (alternating moisture and temperature). First the data must be seperated into moisture and temperature columns. Then it must be gathered into a long dataframe. Then dplyr functions can be applied to the dataframe. Each function follows this workflow with a different output. The functions allow other people to enter their sensor information and raw data and have usable results produced. 
+
+## Functions:
+
+* If the function name ends in a "t"" then it produces results from the temperature columns. If the function ends in an "m"" then it produces results from the moisture columns.
+
+* All of the functions have the same input so it is easy to get lots of results quickly using the entire package. 
+
+* Proper input of function arguments are important. This function only accepts the format "yyyy-mm-dd" for date inputs. Also, the sensornames must be a vector of exactley 8 names. The csv file from the sensor software should be read into R using  `read.csv`. Then this dataframe can be used by any of the functions. 
+
+
+ `smtsensorsumt`
+ 
+This function takes data from Decagon 5TM soil/moisture sensors and returns the max, min, and mean soil temperature for the time period requested
+
+
+`smtsensorsumm`
+
+This function takes data from Decagon 5TM soil/moisture sensors and returns the max, min, and mean soil moisture for the time period requested 
+
+
+`smtsensorboxpt`
+
+This function takes data from Decagon 5TM soil/moisture sensors and returns a boxplot of the soil temperature data for the time period requested 
+
+
+`smtsensorboxpm`
+
+This function takes data from Decagon 5TM soil/moisture sensors and returns a boxplot of the soil moisture data for the time period requested 
+
+
+`smtsensorplott`
+
+This function takes data from Decagon 5TM soil/moisture sensors and returns a plot of the soil temperature for the time period requested 
+
+
+`smtsensorplotm`
+
+This function takes data from Decagon 5TM soil/moisture sensors and returns a plot of the soil moisture for the time period requested 
+
+
+## Examples 
+
+`smtsensorplott`(df, sensorname, "2015-08-10", "2015-08-20")
+
+Date range of interest (format: "y-m-d")
+
+sensorname <- (101_10cmt, 101_10cmm, 101_20cmt, 101_20cmm, 102_10cmt, 102_10cmm, 102_20cmt, 102_20cmm)
+
+## Future directions:
+1. The proposal of this package mentioned the analyses of soil quality date and comparison with the soil moisture and soil temperature data. As sensor functions were developed, the time and skills needed to build more in-depth functions became clear. In addition, the sensor data was interesting enough and there were enough outputs to develop for just this data, that I decided to focus on this aspect of the project. In the future, functions created to process the soil quality data and compare them to the soil physical properties data would be interesting and I hope to develop these.  
+
+1. These functions could also be improved to be more resilient in a couple of ways. The first would be to make them accept dates of all formats. The function could also include a time input to make the range more specific. And finally, the function could include an input for timezone so that it can be used in many locations. Right now it is set for "EST". 
+
